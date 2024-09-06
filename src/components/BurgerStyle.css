@@ -16,7 +16,7 @@
 
 /* Burger Ingredients Container */
 .burgerIngredients {
-  height: 290px;
+  height: 450px;
   width: 100%;
   overflow: auto;
   text-align: center;
@@ -88,7 +88,7 @@
 
 /* Ingredient Buttons */
 .ingrBtns {
-  margin: 0 0 20px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
