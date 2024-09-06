@@ -1,6 +1,28 @@
 import React, { useState } from "react";
 import "./BurgerStyle.css";
 
+// Ingredient Component
+const Ingredient = ({ type }) => {
+  return <div className={`${type}Side`}></div>;
+};
+
+// Ingredient Control Component
+const IngredientControl = ({ label, onAdd, onRemove }) => {
+  return (
+    <div className="ingredientsBlock">
+      <p>{label.toUpperCase()}</p>
+      <div className="ingrBtns">
+        <button className="ingrBtn" onClick={onAdd}>
+          Add
+        </button>
+        <button className="ingrBtn" onClick={onRemove}>
+          Remove
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const Burger = () => {
   const [ingredients, setIngredients] = useState({
     lettuce: 0,
@@ -10,103 +32,40 @@ const Burger = () => {
   });
 
   const addRemoveIngredient = (action, ingredient) => {
-    const count = ingredients[ingredient];
-    const updatedCount = action === "add" ? count + 1 : count - 1;
     setIngredients((prevIngredients) => ({
       ...prevIngredients,
-      [ingredient]: updatedCount >= 0 ? updatedCount : 0,
+      [ingredient]:
+        action === "add"
+          ? prevIngredients[ingredient] + 1
+          : Math.max(0, prevIngredients[ingredient] - 1),
     }));
   };
 
-  const burgerContent = () => {
-    const { lettuce, tomato, cheese, meat } = ingredients;
-    let burger = [];
+  const ingredientTypes = Object.keys(ingredients);
 
-    // outputting the ingredients
-    for (let i = 0; i < lettuce; i++) {
-      burger.push(<div key={burger.length} className="lettuceSide"></div>);
-    }
-    for (let i = 0; i < tomato; i++) {
-      burger.push(<div key={burger.length} className="tomatoSide"></div>);
-    }
-    for (let i = 0; i < cheese; i++) {
-      burger.push(<div key={burger.length} className="cheeseSide"></div>);
-    }
-    for (let i = 0; i < meat; i++) {
-      burger.push(<div key={burger.length} className="meatSide"></div>);
-    }
-    return burger;
+  const renderIngredients = () => {
+    return ingredientTypes.flatMap((type) =>
+      Array.from({ length: ingredients[type] }, (_, index) => (
+        <Ingredient key={`${type}-${index}`} type={type} />
+      ))
+    );
   };
 
   return (
     <>
       <div className="burgerIngredients">
         <div className="topSide"></div>
-        {burgerContent()}
+        {renderIngredients()}
         <div className="bottomSide"></div>
       </div>
-      <div className="ingredientsBlock">
-        <p>Lettuce</p>
-        <div className="ingrBtns">
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("add", "lettuce")}
-          >
-            Add
-          </button>
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("remove", "lettuce")}
-          >
-            Remove
-          </button>
-        </div>
-        <p>TOMATO</p>
-        <div className="ingrBtns">
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("add", "tomato")}
-          >
-            Add
-          </button>
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("remove", "tomato")}
-          >
-            Remove
-          </button>
-        </div>
-        <p>CHEESE</p>
-        <div className="ingrBtns">
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("add", "cheese")}
-          >
-            Add
-          </button>
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("remove", "cheese")}
-          >
-            Remove
-          </button>
-        </div>
-        <p>MEAT</p>
-        <div className="ingrBtns">
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("add", "meat")}
-          >
-            Add
-          </button>
-          <button
-            className="ingrBtn"
-            onClick={() => addRemoveIngredient("remove", "meat")}
-          >
-            Remove
-          </button>
-        </div>
-      </div>
+      {ingredientTypes.map((type) => (
+        <IngredientControl
+          key={type}
+          label={type}
+          onAdd={() => addRemoveIngredient("add", type)}
+          onRemove={() => addRemoveIngredient("remove", type)}
+        />
+      ))}
     </>
   );
 };

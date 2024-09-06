@@ -1,96 +1,104 @@
+/* CSS Variables for Repeated Values */
+:root {
+  --ingredient-width: 100%;
+  --ingredient-background-size: 300px;
+  --centered-display: table;
+  --centered-background: center;
+  --button-bg-color: #c17116;
+  --button-color: #fff;
+  --button-width: 95px;
+  --block-bg-color: #f4b46c;
+  --block-max-width: 200px;
+  --block-radius: 3px;
+  --font-bold: bold;
+  --font-size-large: 18px;
+}
+
+/* Burger Ingredients Container */
 .burgerIngredients {
   height: 290px;
   width: 100%;
   overflow: auto;
-}
-.burgerIngredients p {
   text-align: center;
 }
+
+/* Ingredient Side Styles */
+.topSide,
+.bottomSide,
+.lettuceSide,
+.tomatoSide,
+.cheeseSide,
+.meatSide {
+  background-size: var(--ingredient-background-size);
+  width: var(--ingredient-width);
+  display: var(--centered-display);
+  background-repeat: no-repeat;
+  background-position: var(--centered-background);
+}
+
 .topSide {
   background-image: url(../assets/top.jpg);
-  background-size: 300px;
   height: 110px;
-  width: 100%;
-  display: table;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .bottomSide {
   background-image: url(../assets/bottom.jpg);
-  background-size: 300px;
   height: 60px;
-  width: 100%;
-  display: table;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.lettuceSide {
-  background-image: url(../assets/lettuse.jpg);
-  background-size: 300px;
-  height: 27px;
-  width: 100%;
-  display: table;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-position: center;
-}
-.tomatoSide {
-  background-image: url(../assets/tomato.jpg);
-  background-size: 300px;
-  height: 20px;
-  width: 100%;
-  display: table;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.cheeseSide {
-  background-image: url(../assets/cheese.jpg);
-  background-size: 300px;
-  height: 15px;
-  width: 100%;
-  display: table;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.meatSide {
-  background-image: url(../assets/meat.jpg);
-  background-size: 300px;
-  height: 49px;
-  width: 100%;
-  display: table;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
+.lettuceSide {
+  background-image: url(../assets/lettuse.jpg);
+  height: 27px;
+}
+
+.tomatoSide {
+  background-image: url(../assets/tomato.jpg);
+  height: 20px;
+}
+
+.cheeseSide {
+  background-image: url(../assets/cheese.jpg);
+  height: 15px;
+}
+
+.meatSide {
+  background-image: url(../assets/meat.jpg);
+  height: 49px;
+}
+
+/* Ingredients Control Block */
 .ingredientsBlock {
-  background-color: #f4b46c;
+  background-color: var(--block-bg-color);
   margin: 30px auto 0;
-  display: table;
-  max-width: 200px;
+  display: var(--centered-display);
+  max-width: var(--block-max-width);
   width: 100%;
-  border-radius: 3px;
+  border-radius: var(--block-radius);
   padding: 20px;
   text-align: center;
 }
+
 .ingredientsBlock p {
   padding: 0;
   margin: 0;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: var(--font-bold);
+  font-size: var(--font-size-large);
   text-transform: uppercase;
 }
+
+/* Ingredient Buttons */
 .ingrBtns {
   margin: 0 0 20px;
   display: flex;
   justify-content: space-between;
 }
+
 .ingrBtn {
   border: 0;
-  background-color: #c17116;
-  color: #fff;
+  background-color: var(--button-bg-color);
+  color: var(--button-color);
   padding: 5px;
   cursor: pointer;
-  display: table;
-  width: 95px;
+  display: var(--centered-display);
+  width: var(--button-width);
 }
