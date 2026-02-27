@@ -1,4 +1,4 @@
-import Burger from "./components/Burger";
+import Burger from "./components/Burger.tsx";
 
 function App() {
   return <Burger />;

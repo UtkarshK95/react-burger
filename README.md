@@ -1,121 +1,92 @@
-# React Burger Project
+# React Burger
 
-This is a React application for creating and customizing burgers. The project is built using Vite, a fast frontend build tool, to enhance development speed and efficiency.
-
-## Getting Started
-
-Follow these instructions to set up and run the project on your local machine.
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-- **Node.js** (version 14 or higher)
-- **npm** (Node Package Manager) or **yarn**
-
-### Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/your-username/react-burger.git
-   ```
-
-2. **Navigate to the project directory:**
-
-   ```bash
-   cd react-burger
-   ```
-
-3. **Install the dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-   Or, if you prefer using yarn:
-
-   ```bash
-   yarn install
-   ```
-
-### Running the Application
-
-To start the development server, run:
-
-```bash
-npm run dev
-```
-
-Or, if using yarn:
-
-```bash
-yarn dev
-```
-
-The application will open in your default browser at:
-
-```
-http://localhost:5173/
-```
-
-### Building for Production
-
-To build the application for production, use:
-
-```bash
-npm run build
-```
-
-Or, if using yarn:
-
-```bash
-yarn build
-```
-
-This will create an optimized build in the `dist` directory.
-
-### Linting
-
-To run ESLint and check for code quality:
-
-```bash
-npm run lint
-```
-
-Or, if using yarn:
-
-```bash
-yarn lint
-```
-
-### Project Structure
-
-- **src/**: Contains the source code for the React application.
-
-  - **components/**: Reusable React components.
-  - **assets/**: Static assets like images and icons.
-  - **App.jsx**: Main application component.
-  - **main.jsx**: Entry point for the React app.
-
-- **public/**: Contains public assets and the `index.html` file.
-
-- **vite.config.js**: Vite configuration file.
-
-- **eslint.config.js**: ESLint configuration file.
-
-### Contributing
-
-Feel free to fork this repository and submit pull requests. We welcome contributions and suggestions for improvement!
-
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### Acknowledgments
-
-- Built with [React](https://reactjs.org/) and [Vite](https://vitejs.dev/).
+An interactive burger builder — one of my first React projects, now upgraded with TypeScript, drag-and-drop, and more.
+Stack your ingredients, drag layers to reorder them, and place your order.
 
 ---
 
-Happy coding! 🍔
+## ✨ Features
+
+- Live burger preview — ingredient layers stack in real time as you add or remove
+- Drag-and-drop reordering — grab any ingredient layer and move it up or down
+- Price calculator — per-ingredient pricing with a live running total
+- Order summary modal — review your full order and total before confirming
+- Remove buttons disabled at zero — no negative stacks
+- 11 Vitest unit tests covering all core interactions
+
+---
+
+## 🛠️ Tech Stack
+
+- **React 19** + **Vite 7**
+- **TypeScript 5** — full type safety across all components
+- **@dnd-kit** — accessible drag-and-drop for ingredient reordering
+- **CSS Modules** — scoped styles per component
+- **Vitest** + **Testing Library** — fast unit tests
+- **ESLint 9** with flat config
+
+---
+
+## ▶️ Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local development URL shown in the terminal.
+
+---
+
+## 🧪 Tests
+
+```bash
+npm test          # run all tests
+npm run test:ui   # open the Vitest browser UI
+```
+
+---
+
+## 🔍 Type checking
+
+```bash
+npm run typecheck
+```
+
+---
+
+## 🚀 Deploy to GitHub Pages
+
+```bash
+npm run deploy
+```
+
+Builds the project and publishes the `dist/` folder to the `gh-pages` branch.
+The site will be live at:
+
+```text
+https://UtkarshK95.github.io/react-burger/
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+src/
+├── components/
+│   ├── Burger.tsx            # Burger builder — state, DnD, modal, price
+│   ├── BurgerStyle.module.css
+│   └── Burger.test.tsx       # Vitest + Testing Library tests
+├── assets/                   # Ingredient and bun images
+├── test/
+│   └── setup.ts              # jest-dom matchers
+├── App.tsx
+└── main.tsx
+```
+
+---
+
+## 📄 License
+
+MIT © Utkarsh
