@@ -55,9 +55,12 @@ const SortableIngredient = ({ item }: { item: IngredientItem }) => {
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
       className={styles[`${item.type}Side` as keyof typeof styles]}
-      title={`Drag to reorder ${LABELS[item.type]}`}
       {...attributes}
       {...listeners}
+      // Override dnd-kit's role="button" — this element is a list item with drag capability
+      role="listitem"
+      aria-label={`${LABELS[item.type]} layer — drag to reorder`}
+      title={`Drag to reorder ${LABELS[item.type]}`}
     />
   );
 };
@@ -79,7 +82,9 @@ const IngredientControl = ({ type, count, onAdd, onRemove }: IngredientControlPr
       <button className={styles.ingrBtn} onClick={onAdd}>
         Add
       </button>
-      <span className={styles.count}>{count}</span>
+      <span className={styles.count} aria-label={`${LABELS[type]} count: ${count}`}>
+        {count}
+      </span>
       <button className={styles.ingrBtn} onClick={onRemove} disabled={count === 0}>
         Remove
       </button>
@@ -192,9 +197,11 @@ const Burger = () => {
         <div className={styles.topSide} />
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={stack.map((i) => i.id)} strategy={verticalListSortingStrategy}>
-            {stack.map((item) => (
-              <SortableIngredient key={item.id} item={item} />
-            ))}
+            <div role="list" aria-label="Burger ingredients">
+              {stack.map((item) => (
+                <SortableIngredient key={item.id} item={item} />
+              ))}
+            </div>
           </SortableContext>
         </DndContext>
         <div className={styles.bottomSide} />
@@ -217,6 +224,7 @@ const Burger = () => {
       <button
         className={`${styles.ingrBtn} ${styles.orderNowBtn}`}
         onClick={() => setShowModal(true)}
+        aria-haspopup="dialog"
       >
         Order Now
       </button>

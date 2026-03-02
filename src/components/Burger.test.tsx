@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import Burger from "./Burger.tsx";
 
@@ -72,9 +72,12 @@ describe("Burger", () => {
     render(<Burger />);
     fireEvent.click(screen.getAllByText("Add")[3]); // Meat = $2.00
     fireEvent.click(screen.getByText("Order Now"));
-    // The modal list item contains "Meat × 1 — $2.00"
-    expect(screen.getByRole("list")).toBeInTheDocument();
-    expect(screen.getByRole("listitem")).toHaveTextContent("Meat");
-    expect(screen.getByRole("listitem")).toHaveTextContent("$2.00");
+    // Scope to the dialog to avoid ambiguity with burger stack listitems
+    const modal = screen.getByRole("dialog");
+    const list = within(modal).getByRole("list");
+    expect(list).toBeInTheDocument();
+    const listitem = within(list).getByRole("listitem");
+    expect(listitem).toHaveTextContent("Meat");
+    expect(listitem).toHaveTextContent("$2.00");
   });
 });
