@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   DndContext,
   closestCenter,
@@ -96,39 +96,56 @@ interface OrderModalProps {
 }
 
 const OrderModal = ({ stack, total, onClose }: OrderModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    dialog.showModal();
+    // Keep React state in sync when the dialog is closed natively (e.g. Escape key)
+    dialog.addEventListener("close", onClose);
+    return () => dialog.removeEventListener("close", onClose);
+  }, [onClose]);
+
   const counts = stack.reduce<Partial<Record<IngredientType, number>>>((acc, item) => {
     acc[item.type] = (acc[item.type] ?? 0) + 1;
     return acc;
   }, {});
 
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h2>Your Order</h2>
-        {stack.length === 0 ? (
-          <p>No ingredients added yet.</p>
-        ) : (
-          <ul className={styles.orderList}>
-            {(Object.entries(counts) as [IngredientType, number][]).map(([type, qty]) => (
-              <li key={type}>
-                {LABELS[type]} &times; {qty} &mdash; ${(PRICES[type] * qty).toFixed(2)}
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className={styles.orderTotal}>Total: ${total.toFixed(2)}</p>
-        <div className={styles.modalBtns}>
-          <button className={styles.ingrBtn} onClick={onClose}>
-            Close
+    // onClick on the <dialog> itself fires when the ::backdrop area is clicked
+    <dialog
+      ref={dialogRef}
+      className={styles.modal}
+      aria-labelledby="order-modal-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <h2 id="order-modal-title">Your Order</h2>
+      {stack.length === 0 ? (
+        <p>No ingredients added yet.</p>
+      ) : (
+        <ul className={styles.orderList}>
+          {(Object.entries(counts) as [IngredientType, number][]).map(([type, qty]) => (
+            <li key={type}>
+              {LABELS[type]} &times; {qty} &mdash; ${(PRICES[type] * qty).toFixed(2)}
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className={styles.orderTotal}>Total: ${total.toFixed(2)}</p>
+      <div className={styles.modalBtns}>
+        <button className={styles.ingrBtn} onClick={onClose}>
+          Close
+        </button>
+        {stack.length > 0 && (
+          <button className={`${styles.ingrBtn} ${styles.confirmBtn}`} onClick={onClose}>
+            Confirm Order
           </button>
-          {stack.length > 0 && (
-            <button className={`${styles.ingrBtn} ${styles.confirmBtn}`} onClick={onClose}>
-              Confirm Order
-            </button>
-          )}
-        </div>
+        )}
       </div>
-    </div>
+    </dialog>
   );
 };
 

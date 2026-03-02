@@ -166,24 +166,19 @@
 }
 
 /* ---- Order Modal ---- */
-.modalOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
+/* Native <dialog> element — backdrop handled by ::backdrop pseudo-element */
 .modal {
-  background: #fff;
+  border: none;
   border-radius: 8px;
   padding: 32px;
   min-width: 300px;
   max-width: 440px;
   width: 90%;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .modal h2 {
