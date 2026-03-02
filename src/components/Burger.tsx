@@ -144,7 +144,7 @@ const Burger = () => {
   );
 
   const addIngredient = (type: IngredientType) => {
-    setStack((prev) => [...prev, { id: `${type}-${Date.now()}`, type }]);
+    setStack((prev) => [...prev, { id: `${type}-${crypto.randomUUID()}`, type }]);
   };
 
   const removeIngredient = (type: IngredientType) => {
