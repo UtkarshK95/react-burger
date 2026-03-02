@@ -24,17 +24,17 @@ React Burger is a client-side single-page application that lets users compose a 
 
 ## Tech Stack
 
-| Layer | Technology |
-| --- | --- |
-| UI framework | React 19 |
-| Language | TypeScript 5 (strict mode) |
-| Build tool | Vite 7 |
-| Drag-and-drop | @dnd-kit/core + @dnd-kit/sortable |
-| Styling | CSS Modules |
-| Testing | Vitest 4 + Testing Library |
-| Linting | ESLint 9 (flat config) + typescript-eslint |
-| Formatting | Prettier |
-| Deployment | Vercel |
+| Layer         | Technology                                 |
+| ------------- | ------------------------------------------ |
+| UI framework  | React 19                                   |
+| Language      | TypeScript 5 (strict mode)                 |
+| Build tool    | Vite 7                                     |
+| Drag-and-drop | @dnd-kit/core + @dnd-kit/sortable          |
+| Styling       | CSS Modules                                |
+| Testing       | Vitest 4 + Testing Library                 |
+| Linting       | ESLint 9 (flat config) + typescript-eslint |
+| Formatting    | Prettier                                   |
+| Deployment    | Vercel                                     |
 
 ---
 
@@ -89,17 +89,17 @@ Open the local URL printed in the terminal (default: `http://localhost:5173/`).
 
 ## Available Scripts
 
-| Script | Description |
-| --- | --- |
-| `npm run dev` | Start the Vite development server with HMR |
-| `npm run build` | Compile TypeScript and bundle for production |
-| `npm run preview` | Serve the production build locally |
-| `npm run typecheck` | Run TypeScript type checking without emitting files |
-| `npm run lint` | Run ESLint across all source files |
-| `npm run format` | Format all source files with Prettier |
-| `npm test` | Run Vitest in watch mode |
-| `npm run test:ui` | Open the Vitest browser UI |
-| `npm run ci` | Full quality gate: typecheck, lint, and tests in one command |
+| Script              | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| `npm run dev`       | Start the Vite development server with HMR                   |
+| `npm run build`     | Compile TypeScript and bundle for production                 |
+| `npm run preview`   | Serve the production build locally                           |
+| `npm run typecheck` | Run TypeScript type checking without emitting files          |
+| `npm run lint`      | Run ESLint across all source files                           |
+| `npm run format`    | Format all source files with Prettier                        |
+| `npm test`          | Run Vitest in watch mode                                     |
+| `npm run test:ui`   | Open the Vitest browser UI                                   |
+| `npm run ci`        | Full quality gate: typecheck, lint, and tests in one command |
 
 ---
 
@@ -129,7 +129,7 @@ An `ErrorBoundary` class component in `App.tsx` wraps the burger subtree. Any un
 
 ## Demo
 
-Live site: *(link available after Vercel deployment)*
+Live site: _[https://react-burger.vercel.app/]_
 
 ---
 
