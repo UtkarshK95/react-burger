@@ -34,7 +34,7 @@ React Burger is a client-side single-page application that lets users compose a 
 | Testing | Vitest 4 + Testing Library |
 | Linting | ESLint 9 (flat config) + typescript-eslint |
 | Formatting | Prettier |
-| Deployment | GitHub Pages via gh-pages |
+| Deployment | Vercel |
 
 ---
 
@@ -83,7 +83,7 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed in the terminal (default: `http://localhost:5173/react-burger/`).
+Open the local URL printed in the terminal (default: `http://localhost:5173/`).
 
 ---
 
@@ -100,7 +100,6 @@ Open the local URL printed in the terminal (default: `http://localhost:5173/reac
 | `npm test` | Run Vitest in watch mode |
 | `npm run test:ui` | Open the Vitest browser UI |
 | `npm run ci` | Full quality gate: typecheck, lint, and tests in one command |
-| `npm run deploy` | Build and publish to GitHub Pages |
 
 ---
 
@@ -130,7 +129,7 @@ An `ErrorBoundary` class component in `App.tsx` wraps the burger subtree. Any un
 
 ## Demo
 
-Live site: [https://UtkarshK95.github.io/react-burger/](https://UtkarshK95.github.io/react-burger/)
+Live site: *(link available after Vercel deployment)*
 
 ---
 
