@@ -48,8 +48,7 @@ const PRICES: Record<IngredientType, number> = {
 // ---- Sortable Ingredient Layer ----
 
 const SortableIngredient = ({ item }: { item: IngredientItem }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: item.id });
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: item.id });
 
   return (
     <div
@@ -141,7 +140,7 @@ const Burger = () => {
 
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
   const addIngredient = (type: IngredientType) => {
@@ -174,15 +173,8 @@ const Burger = () => {
     <>
       <div className={styles.burgerIngredients}>
         <div className={styles.topSide} />
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={stack.map((i) => i.id)}
-            strategy={verticalListSortingStrategy}
-          >
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={stack.map((i) => i.id)} strategy={verticalListSortingStrategy}>
             {stack.map((item) => (
               <SortableIngredient key={item.id} item={item} />
             ))}
@@ -212,9 +204,7 @@ const Burger = () => {
         Order Now
       </button>
 
-      {showModal && (
-        <OrderModal stack={stack} total={total} onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <OrderModal stack={stack} total={total} onClose={() => setShowModal(false)} />}
     </>
   );
 };
