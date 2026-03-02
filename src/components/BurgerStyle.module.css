@@ -23,7 +23,7 @@
 .meatSide {
   background-size: var(--ingredient-bg-size);
   width: 100%;
-  display: table;
+  display: block;
   background-repeat: no-repeat;
   background-position: center;
 }
