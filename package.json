@@ -12,6 +12,7 @@
     "test:ui": "vitest --ui",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" index.html",
+    "ci": "npm run typecheck && npm run lint && npm test -- --run",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
