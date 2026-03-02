@@ -207,7 +207,9 @@ const Burger = () => {
         <div className={styles.bottomSide} />
       </div>
 
-      <p className={styles.totalPrice}>Total: ${total.toFixed(2)}</p>
+      <p className={styles.totalPrice} aria-live="polite" aria-atomic="true">
+        Total: ${total.toFixed(2)}
+      </p>
 
       <div className={styles.controls}>
         {INGREDIENT_TYPES.map((type) => (
