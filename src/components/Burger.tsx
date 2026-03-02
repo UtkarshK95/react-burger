@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import {
   DndContext,
   closestCenter,
@@ -165,19 +165,19 @@ const Burger = () => {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
-  const addIngredient = (type: IngredientType) => {
+  const addIngredient = useCallback((type: IngredientType) => {
     setStack((prev) => [...prev, { id: `${type}-${crypto.randomUUID()}`, type }]);
-  };
+  }, []);
 
-  const removeIngredient = (type: IngredientType) => {
+  const removeIngredient = useCallback((type: IngredientType) => {
     setStack((prev) => {
       const lastIndex = [...prev].map((i) => i.type).lastIndexOf(type);
       if (lastIndex === -1) return prev;
       return prev.filter((_, i) => i !== lastIndex);
     });
-  };
+  }, []);
 
-  const handleDragEnd = (event: DragEndEvent) => {
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
     const { active, over } = event;
     if (over && active.id !== over.id) {
       setStack((items) => {
@@ -186,10 +186,20 @@ const Burger = () => {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
-  };
+  }, []);
 
-  const countFor = (type: IngredientType) => stack.filter((i) => i.type === type).length;
-  const total = stack.reduce((sum, item) => sum + PRICES[item.type], 0);
+  // Single pass over stack: build a frequency map and sum the total in one useMemo
+  const { counts, total } = useMemo(() => {
+    const counts: Partial<Record<IngredientType, number>> = {};
+    let total = 0;
+    for (const item of stack) {
+      counts[item.type] = (counts[item.type] ?? 0) + 1;
+      total += PRICES[item.type];
+    }
+    return { counts, total };
+  }, [stack]);
+
+  const countFor = (type: IngredientType) => counts[type] ?? 0;
 
   return (
     <>
